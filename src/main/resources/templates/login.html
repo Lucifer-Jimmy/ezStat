@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - EzStat</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}" href="/css/app.css">
+</head>
+<body class="auth-page">
+<main class="auth-shell">
+    <section class="auth-card auth-card-wide">
+        <div class="auth-header">
+            <p class="auth-eyebrow">EzStat</p>
+            <h1>欢迎回来</h1>
+            <p class="muted">登录后即可查看你的账本、预算和交易记录。</p>
+        </div>
+
+        <div th:if="${param.error}" class="alert alert-error">用户名或密码错误，请重试。</div>
+        <div th:if="${param.logout}" class="alert alert-success">你已安全退出。</div>
+        <div th:if="${param.registered}" class="alert alert-success">注册成功，请登录。</div>
+
+        <form method="post" action="/login" class="form-grid section-gap">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <div class="form-group">
+                <label class="form-label" for="username">用户名</label>
+                <input class="form-control" id="username" name="username" type="text" autocomplete="username" placeholder="请输入用户名" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">密码</label>
+                <input class="form-control" id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码" required>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="submit">登录</button>
+            </div>
+        </form>
+
+        <p class="auth-footer">没有账号？<a href="/register">立即注册</a></p>
+    </section>
+</main>
+</body>
+</html>
+
